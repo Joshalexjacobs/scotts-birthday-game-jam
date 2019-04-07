@@ -41,7 +41,7 @@ public class Zombie : Enemy {
                 MoveTowardsObject(tower.transform, true);
                 LookForPlayer();
             } else {
-                MoveTowardsObject(player.transform, true);
+                MoveTowardsObject(player.transform, false);
             }
         }
     }

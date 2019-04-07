@@ -10,9 +10,13 @@ public class PlayerBullet : MonoBehaviour {
     public GameObject bulletHit;
 
     private Rigidbody2D rigidbody2D;
+    private SpriteRenderer spriteRenderer;
+    private CircleCollider2D circle;
 
     void Start () {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        circle = GetComponent<CircleCollider2D>();
 
         StartCoroutine("Die");
     }
@@ -35,11 +39,15 @@ public class PlayerBullet : MonoBehaviour {
         }
 
         Instantiate(bulletHit, transform.position, transform.rotation);
-        Destroy(gameObject);
+
+        GetComponent<ParticleSystem>().Stop();
+
+        circle.enabled = false;
+        spriteRenderer.enabled = false;
     }
 
     IEnumerator Die() {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         Destroy(gameObject);
     }
 }
